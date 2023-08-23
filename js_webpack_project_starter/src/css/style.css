@@ -48,12 +48,12 @@ section.active{
 
 /* nav bar => */
 #nav{
-    width: 100vw;
+    width: 100vw; /* view with ... 現在の幅の100%を表す */
     height: 5vh;
-    min-height:2rem;
+    min-height:2rem; /* 1rm = 16px */
     background-color: #222;
     position: fixed;
-    z-index: 100;
+    z-index: 100;  /* 最前面 */
     display: flex;
     justify-content:space-around;
     align-items: center;
