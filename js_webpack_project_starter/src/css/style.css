@@ -76,7 +76,7 @@ section.active{
     transform: scale(0.9);
 }
 
-.nav-menu.active{
+.nav-menu.active{       /* nav-menuでactiveの時 */
     color: #222;
     background-color: #fff;
 }
