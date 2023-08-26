@@ -1,4 +1,4 @@
-// import * as Todo from './modules/todo.js';
+import * as Todo from './modules/todo.js';
 
 eruda.init();
 console.log('Hello World!');
