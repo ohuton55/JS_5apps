@@ -13,9 +13,9 @@ appNames.forEach(appName => {
     const menu = document.createElement('a');   // 5つの'a'エレメントを追加する
 
     menu.classList.add('nav-menu');             // すべての要素に.nav-menuクラスを追加
-    menu.textContent = appName.toUpperCase(); // .toUpperCase() = 大文字で表示
+    menu.textContent = appName.toUpperCase(); // .toUpperCase() = 大文字表示
 
-    menu.addEventListener('click', () => {      // クリックされた時
+    menu.addEventListener('click', e => {      // クリックされた時
 
         console.log(e);     // target: を見てみる
         // 要素を1つずつ切り離して表示したいので、先にRemoveする
