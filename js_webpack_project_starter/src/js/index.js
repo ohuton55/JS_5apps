@@ -1,5 +1,8 @@
+// import * as Todo from './modules/todo.js';
 
-import * as Todo from './modules/todo.js';
+eruda.init();
+console.log('Hello World!');
+
 const nav = document.querySelector('#nav');
 const cover = document.querySelector('#cover');
 const appNames = ['todo', 'typing', 'slide-puzzle', 'memory-card', 'life'];
