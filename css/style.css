@@ -62,9 +62,9 @@ section.active{
 
 .nav-menu{
     cursor: pointer;
-    padding: 0 1rem;
-    border-radius: 1rem;
-    transition: 0.3s;
+    padding: 0 1rem;        /* 1rem ... html font-size * n倍px */
+    border-radius: 1rem;    /* 境界の外を丸める */
+    transition: 0.3s;       /* :hover :activeなどつかうとき、時間をとる */
     user-select: none;
 }
 
