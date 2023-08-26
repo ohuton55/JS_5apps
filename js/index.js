@@ -13,7 +13,7 @@ appNames.forEach(appName => {
     const menu = document.createElement('a');   // 5つの'a'エレメントを追加する
 
     menu.classList.add('nav-menu');             // すべての要素に.nav-menuクラスを追加
-    menu.textContent = appName.toUpperCase(); // .toUpperCase() = 大文字表示
+    menu.textContent = appName.toUpperCase(); // .toUpperCase() = 大文字で表示
 
     menu.addEventListener('click', e => {      // クリックされた時
 
@@ -29,11 +29,11 @@ appNames.forEach(appName => {
 
         // クリックされた要素をアクティブにする    
         const navMenus = document.querySelectorAll('.nav-menu');
-        navMenues.forEach(navMenu => {
+        navMenus.forEach(navMenu => {
             navMenu.classList.remove('active');
         })
-        // e.target.classList.add('active');  と同じ
-        menu.classList.add('active'); 
+        e.target.classList.add('active');  と同じ
+        //menu.classList.add('active'); 
     })
     nav.appendChild(menu);
 })
