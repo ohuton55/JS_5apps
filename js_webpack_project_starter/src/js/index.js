@@ -2,6 +2,7 @@ import * as Todo from './modules/todo.js';
 
 eruda.init();
 console.log('Hello World!');
+console.log(Todo);
 
 const nav = document.querySelector('#nav');
 const cover = document.querySelector('#cover');
