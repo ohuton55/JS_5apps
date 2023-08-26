@@ -32,8 +32,8 @@ appNames.forEach(appName => {
         navMenus.forEach(navMenu => {
             navMenu.classList.remove('active');
         })
-        e.target.classList.add('active');  と同じ
-        //menu.classList.add('active'); 
+        e.target.classList.add('active');
+        //menu.classList.add('active'); // と同じ
     })
     nav.appendChild(menu);
 })
