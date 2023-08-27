@@ -83,3 +83,81 @@ section.active{
 }
 
 /* <= nav bar */
+/* to_do => */
+#todo > h1{
+    margin-bottom: 1.5rem;
+}
+
+.todo-container, .done-container{
+    width: 90vw;    /* viewportの幅に対して何％ */
+    max-width: 600px;
+    text-align: center;
+    background-color: lightseagreen;
+    margin-top: 1.5rem;
+    padding: 0.5em 0;
+}
+
+.todo-container > ul > li{
+    background-color: seagreen;
+}
+
+.done-container > ul > li{
+    background-color: darkseagreen;
+}
+
+.td-search-form, .td-add-form{
+    border:3px solid #fff;
+    margin:0.5rem 0;
+}
+
+.td-label{
+    display:inline-block;
+    text-align: center;
+    min-width: 5rem;
+}
+
+.td-search-input, .td-add-input{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 60vw;
+    max-width: 400px;
+    padding: 0.4rem;
+    color: black;
+    outline:  solid #fff;
+}
+
+.td-item{
+    width: 80vw;
+    max-width:  500px;
+    margin: 0.3rem auto;
+    padding: 0.2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.td-content{
+    width: 80%;
+    max-width: 400px;
+    text-align: left;
+    word-break: break-all;  /* 改行しなければテキストがコンテンツボックスからあふれる場合に、ブラウザーが改行を挿入する */
+}
+
+.td-btn-container{
+    display:flex;
+    justify-content: space-between;
+}
+
+.td-btn{
+    height: 1.5rem;
+    margin: 0 0.3rem;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 1rem;
+}
+
+.td-item.hide{
+    display:none;
+}
+
+/* <= to_do */
