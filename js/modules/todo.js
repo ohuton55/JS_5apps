@@ -1,4 +1,6 @@
 export function hello() {
-    console.log('test! from todo.js'); // index.htmlでインポート
-    console.log('test2 from VSCode'); // ftp git test
+    console.log('Hello from todo.');
 }
+
+  console.log('test from todo.');
+
