@@ -42,12 +42,15 @@ export function createTodoElement(todo){
   // todo => todoObj
   // li > p
   const todoItem = document.createElement('li');
+  todoItem.classList.add('td-item');
   const todoContent = document.createElement('p');
+  todoContent.classList.add('td-content');
   todoContent.textContent = todo.content;
   todoItem.appendChild(todoContent);
 
   // btn
   const btnContainer = document.createElement('div');
+  btnContainer.classList.add('td-btn-container');
   const btn = document.createElement('img');
   btn.classList.add('td-btn');
   // upallow-btn
@@ -57,12 +60,18 @@ export function createTodoElement(todo){
 
   // btn-img
   if(!todo.isDone){  // todo.isDoenがfalseの時
+    upBtn.classList.add('edit-btn');
+    btn.classList.add('isDone-btn');
+
     btn.setAttribute('src', './images/todo_button/ok.png');
     btnContainer.appendChild(btn);
     btnContainer.appendChild(upBtn);
     todoItem.appendChild(btnContainer); // append to li elm
     todosUl.appendChild(todoItem);
   }else{
+    upBtn.classList.add('undo-btn');
+    btn.classList.add('delete-btn');
+
     btn.setAttribute('src', './images/todo_button/cancel.png');
     btnContainer.appendChild(btn);
     btnContainer.appendChild(upBtn);
