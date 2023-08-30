@@ -1,8 +1,8 @@
 export function hello() {
   const addForm = document.querySelector('.td-add-form');
   const addInput = document.querySelector('.td-add-input');
-
-
+  
+  
   let todoData = [];
 
   addForm.addEventListener('submit', e => {
@@ -84,30 +84,16 @@ export function createTodoElement(todo){
   
   todoItem.addEventListener('click', e => {
 
-    console.log('clicked!');
     // clickしたターゲットが〇〇を含んでいる場合
-    if(e.target.classList.contains('isDone-btn'){
-//      todo.isDone = true;
-      console.log('isDone');
-    }
-//    if(e.target.classList.contains('undo-btn'){
-//      todo.isDone = false;
-//    }
-//    if(e.target.classList.contains('edit-btn'){
-//      addInput.value = e.target.parentElement.previousElementSibling.textContent;
-//      // 親エレメントの子エレメントを取得
-//      // todoDataから1つずつ要素を取り出し、条件に合うものを代入
-//      todoData = todoData.filter(data => data !== todo);
-//      addInput.focus(); // カーソルが移動する
-//    }
-//    if(e.target.classList.contains('delete-btn'){
-//
-//      todoData = todoData.filter(data => data !== todo);
-//
-//    }
-//
-//    updateLS(todoData);
-//
+      if(e.target.classList.contains('isDone-btn')){
+        todo.isDone = true;
+        console.log(todo.isDone);
+      }
+      if(e.target.classList.contains('undo-btn')){
+        todo.isDone = false;
+        console.log(todo.isDone);
+      }
+ 
   })
 
 }
