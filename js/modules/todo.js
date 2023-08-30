@@ -11,19 +11,20 @@ export function hello() {
     let todoObj = {
       content: addInput.value.trim(),
       isDone: false
-   };
+     };
  
- if(todoObj.content) { 
-   todoData.push(todoObj);
- }
-  addInput.value = '';
+    if(todoObj.content) { 
+       todoData.push(todoObj);
+    }
+    addInput.value = '';
 
-  updateLS(todoData);
+    updateLS(todoData);
 
   })
 
-  createTodoElement({content: 'remains to do', isDone: false})
-  createTodoElement({content: 'already done', isDone: true})
+  createTodoElement({content: 'remains to do', isDone: false});
+  createTodoElement({content: 'already done', isDone: true});
+
 }
 
 export function updateLS(data){
@@ -60,6 +61,7 @@ export function createTodoElement(todo){
 
   // btn-img
   if(!todo.isDone){  // todo.isDoenがfalseの時
+    
     upBtn.classList.add('edit-btn');
     btn.classList.add('isDone-btn');
 
@@ -69,6 +71,7 @@ export function createTodoElement(todo){
     todoItem.appendChild(btnContainer); // append to li elm
     todosUl.appendChild(todoItem);
   }else{
+    
     upBtn.classList.add('undo-btn');
     btn.classList.add('delete-btn');
 
@@ -78,5 +81,31 @@ export function createTodoElement(todo){
     todoItem.appendChild(btnContainer); // append to li elm
     donesUl.appendChild(todoItem);
   }
+  
+//  todoItem.addEventListener('click', e => {
+
+    // clickしたターゲットが〇〇を含んでいる場合
+//    if(e.target.classList.contains('isDone-btn'){
+//      todo.isDone = true;
+//    }
+//    if(e.target.classList.contains('undo-btn'){
+//      todo.isDone = false;
+//    }
+//    if(e.target.classList.contains('edit-btn'){
+//      addInput.value = e.target.parentElement.previousElementSibling.textContent;
+//      // 親エレメントの子エレメントを取得
+//      // todoDataから1つずつ要素を取り出し、条件に合うものを代入
+//      todoData = todoData.filter(data => data !== todo);
+//      addInput.focus(); // カーソルが移動する
+//    }
+//    if(e.target.classList.contains('delete-btn'){
+//
+//      todoData = todoData.filter(data => data !== todo);
+//
+//    }
+//
+//    updateLS(todoData);
+//
+//  })
 
 }
