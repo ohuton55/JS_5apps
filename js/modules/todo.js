@@ -82,12 +82,14 @@ export function createTodoElement(todo){
     donesUl.appendChild(todoItem);
   }
   
-//  todoItem.addEventListener('click', e => {
+  todoItem.addEventListener('click', e => {
 
+    console.log('clicked!');
     // clickしたターゲットが〇〇を含んでいる場合
-//    if(e.target.classList.contains('isDone-btn'){
+    if(e.target.classList.contains('isDone-btn'){
 //      todo.isDone = true;
-//    }
+      console.log('isDone');
+    }
 //    if(e.target.classList.contains('undo-btn'){
 //      todo.isDone = false;
 //    }
@@ -106,6 +108,6 @@ export function createTodoElement(todo){
 //
 //    updateLS(todoData);
 //
-//  })
+  })
 
 }
