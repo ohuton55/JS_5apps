@@ -83,18 +83,6 @@ export function createTodoElement(todo){
     donesUl.appendChild(todoItem);
   }
   
-  todoItem.addEventListener('click', e => {
-
-    // clickしたターゲットが〇〇を含んでいる場合
-      if(e.target.classList.contains('isDone-btn')){
-        todo.isDone = true;
-        console.log(todo.isDone);
-      }
-      if(e.target.classList.contains('undo-btn')){
-        todo.isDone = false;
-        console.log(todo.isDone);
-      }
- 
-  })
+    console.log('click!');
 
 }
