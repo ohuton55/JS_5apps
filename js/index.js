@@ -1,13 +1,16 @@
 //import * as Todo from './modules/todo.js';
+import * as Weather from './apps/weather.js';
 import * as Todo from './apps/todo.js';
 
 eruda.init();
 console.log('Hello World!');
 Todo.hello();
+Weather.hello();
 
 const nav = document.querySelector('#nav');
 const cover = document.querySelector('#cover');
 const appNames = ['todo', 'typing', 'slide-puzzle', 'memory-card', 'life'];
+
 
 
 appNames.forEach(appName => {
