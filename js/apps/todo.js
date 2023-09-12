@@ -21,11 +21,11 @@ export function hello() {
     addInput.value = '';
 
     updateLS(todoData);
-
+    updateTodo(addInput, todoData);
   })
 
-  createTodoElement({content: 'remains to do', isDone: false}, addInput, todoData);
-  createTodoElement({content: 'already done', isDone: true}, addInput, todoData);
+  //createTodoElement({content: 'remains to do', isDone: false}, addInput, todoData);
+  //createTodoElement({content: 'already done', isDone: true}, addInput, todoData);
 
 }
 
@@ -38,10 +38,7 @@ export function getTodoData(){
   return JSON.parse(localStorage.getItem('myTodo'));
 }
 
-export function createTodoElement(todo, addInput, todoData){
-  
-  const todosUl = document.querySelector('.todos');
-  const donesUl = document.querySelector('.dones');
+export function createTodoElement(todo, addInput, todoData, todosUl, donesUl){
 
   // todo => todoObj
   // li > p
@@ -104,5 +101,20 @@ export function createTodoElement(todo, addInput, todoData){
       todoData = todoData.filter(data => data !== todo);
     }
     updateLS(todoData);
+    updateTodo(addInput, todoData);
+  })
+}
+
+export function updateTodo(addInput, todoData){
+
+  const todosUl = document.querySelector('.todos');
+  const donesUl = document.querySelector('.dones');
+  
+  todosUl.innerHTML = ''; //<ul>内の<li><p><img>を空に
+  donesUl.innerHTML = '';
+  
+  todoData = getTodoData();
+  todoData.forEach(todo => {
+    createTodoElement(todo, addInput, todoData, todosUl, donesUl);
   })
 }
