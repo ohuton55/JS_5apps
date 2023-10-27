@@ -1,32 +1,43 @@
-
-
 export function hello() {
-
   const addForm = document.querySelector('.td-add-form'); 
   const addInput = document.querySelector('.td-add-input');  
-
+  const searchForm = document.querySelector('.td-search-form');
+  const searchInput = document.querySelector('.td-search-input');
   const todoData = [];
 
   addForm.addEventListener('submit', e => {
     e.preventDefault(); // デフォルトの更新を抑制する
-
     let todoObj = {
       content: addInput.value.trim(),
       isDone: false
      };
- 
     if(todoObj.content) { 
        todoData.push(todoObj);
     }
     addInput.value = '';
-
     updateLS(todoData);
     updateTodo(addInput, todoData);
   })
 
-  //createTodoElement({content: 'remains to do', isDone: false}, addInput, todoData);
-  //createTodoElement({content: 'already done', isDone: true}, addInput, todoData);
+ //localStorageにデータがある状態でリロードした場合も反映させる
+  updateTodo(addInput, todoData); 
 
+  searchForm.addEventListener('submit', e => {
+    e.preventDefault(); // デフォルトの更新を抑制する
+  })
+  searchInput.addEventListener('keyup', () => {
+    console.log('keyup');
+    const searchWord = searchInput.value.trim().toLowerCase(); //空白を削除して小文字へ
+    const todoItems = document.querySelectorAll('.td-item');     //リストの要素を取得
+
+    todoItems.forEach(todoItem => {
+      todoItem.classList.remove('hide');
+      if(!todoItem.textContent.trim().toLowerCase().includes(searchWord)){
+        //検索が見つからない要素の場合
+        todoItem.classList.add('hide');
+      }  
+    })
+  })
 }
 
 export function updateLS(data){
@@ -35,7 +46,7 @@ export function updateLS(data){
 }
 
 export function getTodoData(){
-  return JSON.parse(localStorage.getItem('myTodo'));
+  return JSON.parse(localStorage.getItem('myTodo')) || [];
 }
 
 export function createTodoElement(todo, addInput, todoData, todosUl, donesUl){
