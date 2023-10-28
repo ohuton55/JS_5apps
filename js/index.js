@@ -3,9 +3,8 @@ import * as Weather from './apps/weather.js';
 import * as Todo from './apps/todo.js';
 
 eruda.init();
-console.log('Hello World!');
-Todo.hello();
-Weather.hello();
+Todo.init();
+Weather.init();
 
 const nav = document.querySelector('#nav');
 const cover = document.querySelector('#cover');
