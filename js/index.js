@@ -1,18 +1,15 @@
-//import * as Todo from './modules/todo.js';
+
 import * as Weather from './apps/weather.js';
 import * as Todo from './apps/todo.js';
 
 eruda.init();
-console.log('Hello World!');
-Todo.hello();
-Weather.hello();
+Todo.init();
+Weather.init();
 
 const nav = document.querySelector('#nav');
 const cover = document.querySelector('#cover');
+
 const appNames = ['todo', 'typing', 'slide-puzzle', 'memory-card', 'life'];
-
-
-
 appNames.forEach(appName => {
     const menu = document.createElement('a');   // 5つの'a'エレメントを追加する
 

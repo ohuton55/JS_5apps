@@ -1,4 +1,4 @@
-export function hello() {
+export function init() {
   const addForm = document.querySelector('.td-add-form'); 
   const addInput = document.querySelector('.td-add-input');  
   const searchForm = document.querySelector('.td-search-form');

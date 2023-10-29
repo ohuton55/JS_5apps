@@ -1,4 +1,4 @@
-export function hello(){
+export function init(){
 
     let targetCityName = 'tokyo';
     const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + targetCityName + ',jp;' + '&appid=' + config.apikey + '&units=metric';
