@@ -215,12 +215,24 @@ section.active{
     max-width: 600px;
     min-height: 20;
     padding: 0.5rem 1rem;
-    font-size: 1.2rem;
+    font-size: 2rem;
 }
 
 #ty-quote{
     background-color: cornflowerblue;
     border: 1px solid #fff;
+}
+
+#ty-quote > span.correct{
+    color: lightgreen;
+}
+
+#ty-quote > span.wrong{
+    color: rgb(255, 0, 0);
+}
+
+#ty-quote > span.bar{
+    border-bottom: 3px solid red;
 }
 
 #ty-author{
@@ -231,6 +243,7 @@ section.active{
 #ty-textarea{
     color: black;
     font-weight: bold;
+    font-size: 2em;
 }
 
 #ty-timer{
