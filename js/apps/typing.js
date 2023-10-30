@@ -11,6 +11,8 @@ const resultContainer = document.querySelector('#ty-result-container');
 const textarea = document.querySelector('#ty-textarea');
 const quote = document.querySelector('#ty-quote');
 const author = document.querySelector('#ty-author-name');
+const LPM = document.querySelector('#ty-LPM');
+const quoteReview = document.querySelector('#ty-quote-review');
 
 
 let timelimit = 30; // 制限時間
@@ -18,7 +20,10 @@ let remainingTime;  // 残り時間
 let isActive = false;   // タイピングメニューがアクティブか
 let isPlaying = false;  // タイピングゲームをプレイ中か
 let intervalId = null;
-let quotes;
+let intervalId2 = null;
+let quotes;         // 名言引用文
+let typedCount;     // タイプした文字数
+let LPMCount;       // 速度
 
 timeSelectEl.addEventListener('change', () => {
     timelimit = timeSelectEl.value;
@@ -40,17 +45,18 @@ window.addEventListener('keypress', e => {
 
 async function start(){
 
-    textarea.textContent = '';
-    quote.textContent = '';
     startPage.classList.remove('show');
     typingGame.classList.add('show');
     titleTime.textContent = timelimit;
     remainingTime = timelimit;
     timer.textContent = remainingTime;
+
     await fetchAndRenderQuotes();
     
     textarea.disabled = false;  // テキストアリア入力有効
     textarea.focus();
+    typedCount = 0;
+
 
     intervalId = setInterval(() => {
         remainingTime -= 1;
@@ -73,12 +79,27 @@ backToStart.addEventListener('click', () => {
 function showResult(){
     textarea.disabled = true;   // テキストアリア入力無効
     clearInterval(intervalId);  // 引数のsetInterval()をクリアする
+    LPMCount = remainingTime === 0 ? Math.floor(typedCount * 60 / timelimit):
+        Math.floor(typedCount * 60 / (timelimit - remainingTime));
+    
     intervalId = setInterval(() => {
         resultContainer.classList.add('show');
     }, 1000);
+    let LPMCountup = 0;
+    intervalId2 = setInterval(() => {
+        LPMCountup += 1;
+        LPM.textContent = LPMCountup;
+        if (LPMCountup >= LPMCount){
+            clearInterval(intervalId2);
+        }
+    }, 10);
+
+    quoteReview.innerHTML = `${quotes.quote} <br><vr> --- ${quotes.author}`
 }
 
 async function fetchAndRenderQuotes(){
+    quote.innerHTML = '';
+    textarea.value = '';
     const RANDOM_QUOTE_API_URL = `https://api.quotable.io/random`;
     const response = await fetch(RANDOM_QUOTE_API_URL);
     const data = await response.json();
@@ -99,9 +120,13 @@ textarea.addEventListener('input', () => {
     spans.forEach(span => {
         span.className = '';
     })
+    typedCount = 0;
     inputArray.forEach((letter, index) => {
         if(letter === spans[index].textContent){
             spans[index].classList.add('correct');
+            if (spans[index].textContent !== ' '){
+                typedCount += 1;
+            }
         }else{
             spans[index].classList.add('wrong');
             if(spans[index].textContent === ' '){
