@@ -1,5 +1,3 @@
-console.log('hello from modules');
-
 const startPage = document.querySelector('#ty-start-page');
 const typingGame = document.querySelector('#ty-game');
 const titleTime = document.querySelector('#ty-title-time');

@@ -18,7 +18,7 @@ appNames.forEach(appName => {
 
     menu.addEventListener('click', e => {      // クリックされた時
 
-        console.log(e);     // target: を見てみる
+        // console.log(e);     // target: を見てみる
         // 要素を1つずつ切り離して表示したいので、先にRemoveする
         cover.classList.remove('active');    
         const appEls = document.querySelectorAll('.app');
