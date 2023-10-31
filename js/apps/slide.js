@@ -11,3 +11,7 @@ menu.forEach(item => {
         console.log(level);
     })
 })
+
+backToMenu.addEventListener('click', () => {
+    menuCover.classList.remove('hide');
+})

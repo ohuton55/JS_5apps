@@ -457,11 +457,9 @@ section.active{
 
 .sp-back-to-menu{
     width: 10rem;
-    height: 4rem;
     color: hotpink;
     font-weight: bold;
     text-align: center;
-    padding: 1rem;
     border: 2px solid hotpink;
     cursor: pointer;
     transition: 0.5s;
