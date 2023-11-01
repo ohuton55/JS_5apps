@@ -439,13 +439,18 @@ section.active{
 }
 
 .sp-tile{
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
     border: 1px solid #eee;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0;
     transition: 0.8s;
+}
+
+.sp-tile.hidden{
+    transform: rotateY(900deg);
+    backface-visibility: hidden;
 }
 
 .sp-moves{

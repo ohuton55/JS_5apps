@@ -9,6 +9,7 @@ let level;
 let size;
 let orderedArray = [];
 const images = ['space', 'veges'];
+let hiddenTileIndex;
 let selectedImage;
 const levelMap = {
     easy: {grid: 'auto auto', size: 2},
@@ -28,6 +29,7 @@ menu.forEach(item => {
                 orderedArray.push(titleXY);
             }
         }
+        hiddenTileIndex = Math.floor(Math.random() * size ** 2);
         screen.style.gridTemplateColumns = levelMap[level].grid;
         start();
     })
@@ -42,6 +44,15 @@ function setOriginalImage(){
     originalImage.setAttribute('src', `./images/slide_puzzle/${selectedImage}/${selectedImage}.png`);
 }
 
+originalImage.onload = () => {
+    const naturalWidth = originalImage.naturalWidth;
+    const naturalHeight = originalImage.naturalHeight;
+    const ratio = Math.floor(naturalHeight / naturalWidth * 1000) / 1000;
+    screen.style.width = "480px";
+    // ratio ... 横を1としたときの縦の比率
+    screen.style.height = `${Math.floor(480 * ratio)}px`
+}
+
 originalBtn.addEventListener('mouseover', () => {
     originalImage.classList.add('show');
 })
@@ -52,9 +63,12 @@ originalBtn.addEventListener('mouseleave', () => {
 
 function renderTiles(arr){
     screen.innerHTML = '';
-    arr.forEach(tile => {
+    arr.forEach((tile, index) => {
         const div = document.createElement('div');
         div.classList.add('sp-tile');
+        if(index === hiddenTileIndex){
+            div.classList.add('hidden');
+        }
         div.style.backgroundImage = `url(./images/slide_puzzle/${selectedImage}/${level}/tile${tile}.png)`;
         screen.appendChild(div);
     })
