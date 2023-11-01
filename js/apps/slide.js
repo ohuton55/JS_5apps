@@ -8,8 +8,9 @@ const screen = document.querySelector('.sp-screen');
 let level;
 let size;
 let orderedArray = [];
-const images = ['space', 'veges'];
 let hiddenTileIndex;
+let tilesArray = [];    // シャッフルしたarr用
+const images = ['space', 'veges'];
 let selectedImage;
 const levelMap = {
     easy: {grid: 'auto auto', size: 2},
@@ -76,5 +77,18 @@ function renderTiles(arr){
 
 function start(){
     setOriginalImage();
-    renderTiles(orderedArray);
+    tilesArray = generateShuffleArray(orderedArray);
+    renderTiles(tilesArray);
+}
+
+function generateShuffleArray(arr){
+    // slice() ... 空のパラメータにするとコピーできる
+    let shuffledArray = arr.slice();
+    for (let i = shuffledArray.length - 1; i > -1; i--){
+        let randomIndex = Math.floor(Math.random() * shuffledArray.length);
+        let tempValue = shuffledArray[i];
+        shuffledArray[i] = shuffledArray[randomIndex];
+        shuffledArray[randomIndex] = tempValue;
+    }
+    return shuffledArray;
 }
