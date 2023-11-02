@@ -10,6 +10,7 @@ let size;
 let orderedArray = [];
 let hiddenTileIndex;
 let tilesArray = [];    // シャッフルしたarr用
+let tiles;
 const images = ['space', 'veges'];
 let selectedImage;
 const levelMap = {
@@ -79,6 +80,7 @@ function start(){
     setOriginalImage();
     tilesArray = generateShuffleArray(orderedArray);
     renderTiles(tilesArray);
+    updateScreen();
 }
 
 function generateShuffleArray(arr){
@@ -91,4 +93,29 @@ function generateShuffleArray(arr){
         shuffledArray[randomIndex] = tempValue;
     }
     return shuffledArray;
+}
+
+
+function updateScreen(){
+    tiles = document.querySelectorAll('.sp-tile');
+    console.log(tiles);
+
+    function generateNewArray(arr, index, hiddenTileIndex){
+        const tempValue = arr[index];
+        arr[index] = arr[hiddenTileIndex];
+        arr[hiddenTileIndex] = tempValue;
+        return arr;
+    }
+    
+    function updateTiles(index){
+        tilesArray = generateNewArray(tilesArray, index, hiddenTileIndex);
+        hiddenTileIndex = index;
+        renderTiles(tilesArray);
+    }
+
+    tiles.forEach((tile, index) => {
+        tile.addEventListener('click', () => {
+            updateTiles(index);
+        })
+    })
 }
