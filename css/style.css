@@ -427,7 +427,7 @@ section.active{
     100%{transform: scale(1.2);}
 }
 
-@keyframes hue-rotaion {
+@keyframes hue-rotation {
     0%  {filter: hue-rotate(0deg);}
     16% {filter: hue-rotate(50deg);}
     32% {filter: hue-rotate(100deg);}
@@ -451,6 +451,11 @@ section.active{
 .sp-tile.hidden{
     transform: rotateY(900deg);
     backface-visibility: hidden;
+}
+
+.sp-tile.complete{
+    border: none;
+    pointer-events: none;   /* クリックイベントが発生しなくなる */
 }
 
 .sp-moves{
