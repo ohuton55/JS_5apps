@@ -49,7 +49,8 @@ function createDeck(){
     const orderedFaces = [...faces, ...faces];
     const shuffledFaces = generateShuffleArray(orderedFaces);
 
-    shuffledFaces.ForEach(face => {
+    shuffledFaces.forEach((face) => {
+        console.log(face);
         const cardDiv = createCard();
         const frontImage = cardDiv.querySelector('.mc-front > img');
         frontImage.setAttribute('src', facesPath[face]);
