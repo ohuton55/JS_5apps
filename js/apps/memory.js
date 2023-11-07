@@ -1,15 +1,17 @@
 const deck = document.querySelector('.mc-deck');
 const congrats = document.querySelector('.mc-congrats');
 
+let cards = [];
+let openedCards = [];
 const faces = ['bug', 'upload', 'congfiguration', 'connection', 'database', 'www', 'mobile', 'keyboard'];
-const facesPath = {bug: './imagees/memory_card/bug.svg',
-    upload: './iimages/memory_card/upload.svg',
-    configuration: './iimages/memory_card/configuration.svg',
-    connection: './iimages/memory_card/connection.svg',
-    database: './iimages/memory_card/database.svg',
-    www: './iimages/memory_card/www.svg',
-    mobile: './iimages/memory_card/mobile.svg',
-    keyboard: './iimages/memory_card/keyboard.svg'};
+const facesPath = {bug: './images/memory_card/bug.svg',
+    upload: './images/memory_card/upload.svg',
+    configuration: './images/memory_card/configuration.svg',
+    connection: './images/memory_card/connection.svg',
+    database: './images/memory_card/database.svg',
+    www: './images/memory_card/www.svg',
+    mobile: './images/memory_card/mobile.svg',
+    keyboard: './images/memory_card/keyboard.svg'};
 
 function createDeck(){
     function createCard(){
@@ -50,12 +52,30 @@ function createDeck(){
     const shuffledFaces = generateShuffleArray(orderedFaces);
 
     shuffledFaces.forEach((face) => {
-        console.log(face);
         const cardDiv = createCard();
         const frontImage = cardDiv.querySelector('.mc-front > img');
         frontImage.setAttribute('src', facesPath[face]);
         deck.appendChild(cardDiv);
+        cardDiv.addEventListener('click', flip);
     })
 }
 
 createDeck();
+
+function flip(){
+    if(openedCards.length === 0){
+        this.classList.add('rotate');
+        openedCards.push(this);
+    }else if(openedCards.length === 1){
+        if(this === openedCards[0]){
+            return
+        }
+        this.classList.add('rotate');
+        openedCards.push(this);
+        matchedOrNot(openedCards[0], openedCards[1]);
+    }
+}
+
+function matchedOrNot(card1, card2){
+
+}
