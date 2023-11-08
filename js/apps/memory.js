@@ -1,8 +1,20 @@
 const deck = document.querySelector('.mc-deck');
 const congrats = document.querySelector('.mc-congrats');
+const timer = document.querySelector('.mc-time');
+const matchedCounter = document.querySelector('.mc-matched');
+const failedCounter = document.querySelector('.mc-failed');
+const resetBtn = document.querySelector('.mc-reset-btn');
+const finishTimeEl = document.querySelector('.mc-congrats > h2 > span');
+const retry = document.querySelector('.mc-retry-btn');
 
 let cards = [];
 let openedCards = [];
+let matchedCount = 0;
+let playingNow = false;
+let time = 0;
+let failedCount = 0;
+let setIntervalId;
+let finishTime;
 const faces = ['bug', 'upload', 'configuration', 'connection', 'database', 'www', 'mobile', 'keyboard'];
 const facesPath = {bug: './images/memory_card/bug.svg',
     upload: './images/memory_card/upload.svg',
@@ -60,9 +72,14 @@ function createDeck(){
     })
 }
 
-createDeck();
-
 function flip(){
+    if(!playingNow){
+        playingNow = true;
+        setIntervalId = setInterval(() => {
+            time++;
+            timer.textContent = time;
+        }, 1000)
+    }
     if(openedCards.length === 0){
         this.classList.add('rotate');
         openedCards.push(this);
@@ -81,12 +98,24 @@ function matchedOrNot(card1, card2){
     const cardOneFace = card1.querySelector('.mc-front > img').src;
     const cardTwoFace = card2.querySelector('.mc-front > img').src;
     if(cardOneFace === cardTwoFace){
+        matchedCount++;
+        matchedCounter.textContent = matchedCount;
         cardsToCheck.forEach(card => {
             card.classList.add('matched');
             card.removeEventListener('click', flip);
         })
+        if(matchedCount === 8){
+            clearInterval(setIntervalId);
+            finishTime = time;
+            finishTimeEl.textContent = finishTime;
+            setTimeout(() => {
+                congrats.classList.add('show');
+            }, 2500)
+        }
         openedCards = [];
     }else{
+        failedCount++;
+        failedCounter.textContent = failedCount;
         setTimeout(() => {
             cardsToCheck.forEach(card => {
                 card.classList.remove('rotate');
@@ -95,3 +124,28 @@ function matchedOrNot(card1, card2){
         openedCards = [];
     }
 }
+
+resetBtn.addEventListener('click', ()=> {
+    start();
+})
+
+function start(){
+    matchedCount = 0;
+    matchedCounter.textContent = matchedCount;
+    time = 0;
+    timer.textContent = time;
+    failedCount = 0;
+    failedCounter.textContent = failedCount;
+    openedCards = [];
+    deck.innerHTML = '';
+    playingNow = false;
+    clearInterval(setIntervalId);
+    createDeck();
+}
+
+retry.addEventListener('click', ()=> {
+    congrats.classList.remove('show');
+    start();
+})
+
+start();
