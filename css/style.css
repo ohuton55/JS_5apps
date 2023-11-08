@@ -574,6 +574,27 @@ section.active{
     transform: rotateY(180deg);
 }
 
+.mc-card.matched{
+    background-color: darkorange;
+}
+
+.mc-card.matched .mc-front{
+    animation: swing 1s linear infinite;
+    filter: drop-shadow(0 0 3px #fff);
+}
+
+@keyframes swing{
+    0%, 100%{
+        transform:rotate(0);
+    }
+    25%{
+        transform: rotate(10deg);
+    }
+    75%{
+        transform: rotate(-10deg);
+    }
+}
+
 .mc-congrats{
     height: 100vh;
     width: 100vw;

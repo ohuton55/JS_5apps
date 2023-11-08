@@ -3,7 +3,7 @@ const congrats = document.querySelector('.mc-congrats');
 
 let cards = [];
 let openedCards = [];
-const faces = ['bug', 'upload', 'congfiguration', 'connection', 'database', 'www', 'mobile', 'keyboard'];
+const faces = ['bug', 'upload', 'configuration', 'connection', 'database', 'www', 'mobile', 'keyboard'];
 const facesPath = {bug: './images/memory_card/bug.svg',
     upload: './images/memory_card/upload.svg',
     configuration: './images/memory_card/configuration.svg',
@@ -77,5 +77,21 @@ function flip(){
 }
 
 function matchedOrNot(card1, card2){
-
+    const cardsToCheck = [card1, card2];
+    const cardOneFace = card1.querySelector('.mc-front > img').src;
+    const cardTwoFace = card2.querySelector('.mc-front > img').src;
+    if(cardOneFace === cardTwoFace){
+        cardsToCheck.forEach(card => {
+            card.classList.add('matched');
+            card.removeEventListener('click', flip);
+        })
+        openedCards = [];
+    }else{
+        setTimeout(() => {
+            cardsToCheck.forEach(card => {
+                card.classList.remove('rotate');
+            })
+        }, 800);
+        openedCards = [];
+    }
 }
