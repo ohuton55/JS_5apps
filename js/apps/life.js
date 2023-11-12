@@ -8,6 +8,8 @@ const pattern = document.querySelector('.gl-pattern');
 const controller = document.querySelector('.gl-controller');
 const backToMenu = document.querySelector('.gl-back-to-menu');
 const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+
 
 let size = sizeSelect.value;
 let speed = speedSelect.value;
@@ -17,8 +19,8 @@ let numOfCols;
 let numOfRows;
 const RESUME_COLOR = `#0aa`;
 const PAUSE_COLOR = `#f55`;
-const ALIVE_CELL = `#0f7`;
-const DEAD_CELL = `#000`;
+const ALIVE_COLOR = `#0f7`;
+const DEAD_COLOR = `#000`;
 
 sizeSelect.addEventListener('change', () => {
     size = sizeSelect.value;
@@ -68,8 +70,6 @@ function generateEmptyGrid(){
     // width/height は size で割り切れる固定値にしている
     numOfCols = canvas.width / size;
     numOfRows = canvas.height / size;
-    console.log(numOfCols);
-    console.log(numOfRows);
     let emptyGrid = new Array(numOfCols);
 
     for(let i = 0; i < emptyGrid.length; i++){
@@ -92,5 +92,17 @@ function createRandomGrid(num){
 }
 
 function drawAliveCells(grid){
-
+    for(let i = 0; i < numOfCols; i++){
+        for(let j = 0; j < numOfRows; j++){
+            let x = i * size;
+            let y = j * size;
+            if(grid[i][j] === 1){
+                ctx.fillStyle = ALIVE_COLOR;
+                ctx.fillRect(x, y, size, size);
+            }else{
+                ctx.fillStyle = DEAD_COLOR;
+                ctx.fillRect(x, y, size, size);
+            }
+        }
+    }
 }
