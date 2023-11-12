@@ -106,3 +106,39 @@ function drawAliveCells(grid){
         }
     }
 }
+
+function countAliveNeighbors(grid, x, y){
+    let neighbors = 0;
+    for(let i = -1; i < 2; i++){
+        for(let j = -1; j < 2; j++){
+            let col = (x + i + numOfCols) % numOfCols;
+            let row = (y + j + numOfRows) % numOfRows;
+            neighbors += grid[col][row];
+        }
+    }
+    neighbors -= grid[x][y];
+    return neighbors
+}
+
+function createNextGrid(){
+    let nextGrid = generateEmptyGrid();
+    for(let i = 0; i < numOfCols; i++){
+        for(let j = 0; j <numOfRows; j++){
+            let neighbors = countAliveNeighbors(grid, i, j);
+            if(grid[i][j] === 0){
+                if(neighbors === 3){
+                    nextGrid[i][j] = 1;
+                }else{
+                    nextGrid[i][j] = 0;
+                }
+            }else{
+                if(neighbors === 2 || neighbors === 3){
+                    nextGrid[i][j] = 1;
+                }else{
+                    nextGrid[i][j] = 0;
+                }
+            }
+        }
+    }
+    return nextGrid
+}
