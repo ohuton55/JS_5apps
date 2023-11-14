@@ -9,7 +9,8 @@ const controller = document.querySelector('.gl-controller');
 const backToMenu = document.querySelector('.gl-back-to-menu');
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
-
+const generation = document.querySelector('.gl-generation');
+const life = document.querySelector('#life');
 
 let size = sizeSelect.value;
 let speed = speedSelect.value;
@@ -17,6 +18,9 @@ let runningState = false;
 let grid;
 let numOfCols;
 let numOfRows;
+let frameCount = 0;
+let animationId;
+let numOfGeneration = 1;
 const RESUME_COLOR = `#0aa`;
 const PAUSE_COLOR = `#f55`;
 const ALIVE_COLOR = `#0f7`;
@@ -38,6 +42,9 @@ randomBtns.forEach(btn => {
         controller.style.backgroundColor = PAUSE_COLOR;
         grid = createRandomGrid(btn.dataset.value);
         drawAliveCells(grid);
+        setTimeout(() => {
+            animate();
+        }, 600)
     })
 })
 selfSelectBtn.addEventListener('click', () => {
@@ -46,6 +53,19 @@ selfSelectBtn.addEventListener('click', () => {
     pattern.classList.add('active');
     controller.textContent = `Generate`;
     controller.style.backgroundColor = RESUME_COLOR;
+
+    function createZeroGrid(){
+        let zeroGrid = generateEmptyGrid();
+        for(let i = 0; i < numOfCols; i++){
+            for(let j = 0; j < numOfRows; j++){
+                zeroGrid[i][j] = 0;
+            }
+        }
+        return zeroGrid
+    }
+
+    grid = createZeroGrid();
+    drawAliveCells(grid);
 })
 
 backToMenu.addEventListener('click', () => {
@@ -53,6 +73,10 @@ backToMenu.addEventListener('click', () => {
     canvasContainer.classList.remove('active');
     pattern.classList.remove('active');
     runningState = false;
+    cancelAnimationFrame(animationId);
+    frameCount = 0;
+    numOfGeneration = 1;
+    generation.textContent = 1;
 })
 
 controller.addEventListener('click', () => {
@@ -60,9 +84,11 @@ controller.addEventListener('click', () => {
     if(!runningState){
         controller.textContent = 'Resume';
         controller.style.backgroundColor = RESUME_COLOR;
+        cancelAnimationFrame(animationId);
     }else{
         controller.textContent = 'Pause';
         controller.style.backgroundColor = PAUSE_COLOR;
+        animate();
     }
 })
 
@@ -75,7 +101,6 @@ function generateEmptyGrid(){
     for(let i = 0; i < emptyGrid.length; i++){
         emptyGrid[i] = new Array(numOfRows);
     }
-    
     return emptyGrid
 }
 
@@ -141,4 +166,22 @@ function createNextGrid(){
         }
     }
     return nextGrid
+}
+
+function animate(){
+    frameCount ++;
+    if(frameCount % speed === 0){
+        grid = createNextGrid();
+        drawAliveCells(grid);
+        numOfGeneration ++;
+        generation.textContent = numOfGeneration;
+    }
+    animationId = requestAnimationFrame(animate);     // 1秒間に60回 animate()が実行される
+
+    if(!life.classList.contains('active')){
+        runningState = false;
+        cancelAnimationFrame(animationId);
+        controller.textContent = 'Resume';
+        controller.style.backgroundColor = RESUME_COLOR;
+    }
 }
